@@ -1,0 +1,41 @@
+{
+  "pins" : [
+    {
+      "identity" : "abseil-cpp",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ronnyf/abseil-cpp.git",
+      "state" : {
+        "revision" : "6c4751e13e95ae76b9e1c362f470f2823c91e972",
+        "version" : "1.0.5"
+      }
+    },
+    {
+      "identity" : "googletest",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ronnyf/googletest.git",
+      "state" : {
+        "revision" : "79742fd30b23fbd60784ceeb1a4eedfd38d7a0a8",
+        "version" : "1.14.0"
+      }
+    },
+    {
+      "identity" : "jsoncpp",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ronnyf/jsoncpp.git",
+      "state" : {
+        "revision" : "0b28600ee594cc53f31ea13befd0abd93dc4ee07",
+        "version" : "1.9.6"
+      }
+    },
+    {
+      "identity" : "utf8_range",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ronnyf/utf8_range.git",
+      "state" : {
+        "revision" : "beab49e155855e53317db496e065372fa9115974",
+        "version" : "1.0.3"
+      }
+    }
+  ],
+  "version" : 2
+}
