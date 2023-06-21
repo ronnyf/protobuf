@@ -1,0 +1,1 @@
+../../../../../src/google/protobuf/compiler/java/message_builder_lite.h

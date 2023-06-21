@@ -1,0 +1,1 @@
+../../../../../src/google/protobuf/compiler/csharp/csharp_source_generator_base.h

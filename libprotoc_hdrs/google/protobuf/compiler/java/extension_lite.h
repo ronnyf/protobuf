@@ -1,0 +1,1 @@
+../../../../../src/google/protobuf/compiler/java/extension_lite.h
