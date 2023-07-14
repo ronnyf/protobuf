@@ -157,24 +157,29 @@ void PyiGenerator::PrintImportForDescriptor(
   std::string module_name_owned = StrippedModuleName(filename);
   absl::string_view module_name(module_name_owned);
   size_t last_dot_pos = module_name.rfind('.');
-  std::string import_statement;
-  if (last_dot_pos == std::string::npos) {
-    import_statement = absl::StrCat("import ", module_name);
-  } else {
-    import_statement =
-        absl::StrCat("from ", module_name.substr(0, last_dot_pos), " import ",
-                     module_name.substr(last_dot_pos + 1));
-    module_name = module_name.substr(last_dot_pos + 1);
-  }
-  std::string alias = absl::StrCat("_", module_name);
+  std::string alias = absl::StrCat("_", module_name.substr(last_dot_pos + 1));
   // Generate a unique alias by adding _1 suffixes until we get an unused alias.
   while (seen_aliases->find(alias) != seen_aliases->end()) {
     absl::StrAppend(&alias, "_1");
   }
-  printer_->Print("$statement$ as $alias$\n", "statement",
-                  import_statement, "alias", alias);
-  import_map_[filename] = alias;
-  seen_aliases->insert(alias);
+  if (ContainsPythonKeyword(module_name)) {
+    printer_->Print("import importlib\n");
+    printer_->Print("$alias$ = importlib.import_module('$name$')\n", "alias",
+                    alias, "name", module_name);
+  } else {
+    std::string import_statement;
+    if (last_dot_pos == std::string::npos) {
+      import_statement = absl::StrCat("import ", module_name);
+    } else {
+      import_statement =
+          absl::StrCat("from ", module_name.substr(0, last_dot_pos), " import ",
+                       module_name.substr(last_dot_pos + 1));
+    }
+    printer_->Print("$statement$ as $alias$\n", "statement", import_statement,
+                    "alias", alias);
+    import_map_[filename] = alias;
+    seen_aliases->insert(alias);
+  }
 }
 
 void PyiGenerator::PrintImports() const {
